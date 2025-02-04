@@ -8,6 +8,8 @@ app.use(express.urlencoded({ extended: false }))
 const MongoUri = 'mongodb://127.0.0.1:27017/urlshortener'
 
 mongoose.connect(MongoUri, {
+    serverSelectionTimeoutMS : 60000,
+    socketTimeoutMS : 90000
 }).then(() => console.log("MongoDB Connected"))
     .catch(err => console.error("MongoDB Connection Error:", err));
 
