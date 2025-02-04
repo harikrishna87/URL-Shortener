@@ -5,7 +5,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 
-mongoose.connect('mongodb://127.0.0.1:27017/urlshortener', {
+const MongoUri = 'mongodb://127.0.0.1:27017/urlshortener'
+
+mongoose.connect(MongoUri, {
 }).then(() => console.log("MongoDB Connected"))
     .catch(err => console.error("MongoDB Connection Error:", err));
 
