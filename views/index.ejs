@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>URL Shortener</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f4f7fc, #d9e2ff);
+            font-family: 'Times New Roman', Times, serif;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        td {
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: rgba(255, 0, 0, 0.76);
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .form-inline {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        input[type="url"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        input[type="url"]:focus {
+            border-color: green;
+            outline: none;
+        }
+
+        button.btn-success {
+            background-color: lightgreen;
+            border: none;
+            padding: 7px 14px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0px 3px 10px rgba(40, 167, 69, 0.2);
+        }
+
+        button.btn-success:hover {
+            background-color: green;
+            box-shadow: 0px 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .table {
+            margin-top: 30px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table thead {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .table tbody {
+            background: #f1f1f1;
+        }
+        .table tbody tr {
+            transition: all 0.3s;
+        }
+
+        .table tbody tr:hover {
+            transform: scale(1.02);
+        }
+
+        td a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        td a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .form-inline {
+                flex-direction: column;
+            }
+
+            input[type="url"] {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>URL Shortener</h1>
+        <form action="/shortUrls" method="POST" class="my-4 form-inline">
+            <label for="fullUrl" class="sr-only">Enter your Full Url</label>
+            <input required placeholder="Enter your Full Url" type="url" name="fullUrl" id="fullUrl" class="form-control col mr-2">
+            <button class="btn btn-success" type="submit">Shorten</button>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Full URL</th>
+                    <th>Short URL</th>
+                    <th>Clicks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% shortUrls.forEach(shortUrl=> { %>
+                    <tr>
+                        <td><a href="<%= shortUrl.full %>" target="_blank">
+                                <%= shortUrl.full %>
+                            </a></td>
+                        <td><a href="<%= shortUrl.short %>" target="_blank">
+                                <%= shortUrl.short %>
+                            </a></td>
+                        <td>
+                            <%= shortUrl.clicks %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
