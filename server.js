@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const shortUrl = require('./models/shorturl.js')
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 
 const MongoUri = 'mongodb://127.0.0.1:27017/urlshortener'
 
